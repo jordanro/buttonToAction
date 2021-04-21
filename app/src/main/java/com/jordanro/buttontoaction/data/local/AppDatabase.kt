@@ -1,0 +1,28 @@
+package com.jordanro.buttontoaction.data.local
+
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.jordanro.buttontoaction.data.entities.Action
+import com.jordanro.buttontoaction.data.entities.ActionState
+
+@Database(entities = [Action::class, ActionState::class], version = 1, exportSchema = false)
+@TypeConverters(BaseConverter::class,ActionTypeConverter::class)
+abstract class AppDatabase: RoomDatabase() {
+
+    abstract fun actionsDao(): ActionsDao
+
+    companion object {
+        @Volatile private var instance: AppDatabase? = null
+
+        fun getDatabase(context: Context): AppDatabase =
+            instance ?: synchronized(this) { instance ?: buildDatabase(context).also { instance = it } }
+
+        private fun buildDatabase(appContext: Context) =
+            Room.databaseBuilder(appContext, AppDatabase::class.java, "aidoc")
+                .fallbackToDestructiveMigration()
+                .build()
+    }
+}

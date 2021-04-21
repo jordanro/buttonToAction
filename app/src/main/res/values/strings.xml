@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Button To Action</string>
+    <string name="button_title">Aidoc Go</string>
+    <string name="toast_action">Action is Toast!</string>
+    <string name="calling_contact">Calling %s</string>
+    <string name="select_contacts">Select a Contact:</string>
+    <string name="notification_title">Action Notification!</string>
+    <string name="channel_name">AIDOC</string>
+    <string name="channel_description">AIDOC Channel</string>
+</resources>
